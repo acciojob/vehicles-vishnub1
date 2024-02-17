@@ -1,8 +1,14 @@
 package com.driver;
 
+//F1: extends Car
+//
+//accelerate(rate): add rate to the current speed and change the gear accordingly
 public class F1 extends Car {
+    private String name;
+    private boolean isManual;
 
     public F1(String name, boolean isManual) {
+        super("BMW", 1);
         //Use arbitrary values for parameters which are not mentioned
     }
 
