@@ -1,34 +1,48 @@
 package com.driver;
 
 public class F1 extends Car {
-    // Constructor
+    private boolean isManual;
+
     public F1(String name, boolean isManual) {
-        super(name, 4, 2, 6, isManual, "Sports", 1);
-        // For parameters not mentioned, they will be initialized in the Car constructor
+        super(name, 4, 2, 6, true, "race", 1);
+        this.isManual = isManual;
     }
 
-    // Additional method
-    public void accelerate(int rate){
+    // Getters for F1 class
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    public boolean isManual() {
+        return isManual;
+    }
+
+    public int getCurrentGear() {
+        return super.getCurrentGear();
+    }
+
+    // Other methods
+    public void accelerate(int rate) {
         int newSpeed = getCurrentSpeed() + rate;
 
-        if(newSpeed <= 0) {
-            stop();
+        if (newSpeed <= 0) {
+            stop(); // Stop the car, set gear as 1
+        } else if (newSpeed <= 50) {
+            changeGear(1);
+        } else if (newSpeed <= 100) {
+            changeGear(2);
+        } else if (newSpeed <= 150) {
+            changeGear(3);
+        } else if (newSpeed <= 200) {
+            changeGear(4);
+        } else if (newSpeed <= 250) {
+            changeGear(5);
         } else {
-            int newGear = 1;
-            if(newSpeed >= 1 && newSpeed <= 50)
-                newGear = 1;
-            else if(newSpeed >= 51 && newSpeed <= 100)
-                newGear = 2;
-            else if(newSpeed >= 101 && newSpeed <= 150)
-                newGear = 3;
-            else if(newSpeed >= 151 && newSpeed <= 200)
-                newGear = 4;
-            else if(newSpeed >= 201 && newSpeed <= 250)
-                newGear = 5;
-            else
-                newGear = 6;
+            changeGear(6);
+        }
 
-            changeGear(newGear);
+        if (newSpeed > 0) {
             changeSpeed(newSpeed, getCurrentDirection());
         }
     }
